@@ -1,0 +1,38 @@
+@-moz-document url-prefix() {
+  fieldset { display: table-cell; }
+}
+
+.glyphicon {
+    cursor: pointer;
+}
+
+.page-header {
+	background: url(/images/header.png) no-repeat 100%;
+	background-size: cover;
+	height: 20%;
+}
+
+#imgHeader {
+	height:100%;
+}
+
+.tabla-expediente {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.tabla-expediente-row:hover {
+	background: #e6e6ff;
+    cursor: pointer
+}
+
+.tabla-expediente-row .btn-group {
+	visibility: hidden;
+}
+.tabla-expediente-row:hover .btn-group {
+	visibility: visible;
+}
+
+.tabla-expediente .btn:hover .glyphicon {
+	color:#262626;
+}

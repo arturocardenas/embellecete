@@ -1,0 +1,112 @@
+<!-- Expediente Personal -->
+<div class="container">
+  <h2>Expedientes Personales<p class="lead">Busqueda, registro y edicion de expedientes personales</p></h2>
+  <form role="form" class="form-horizontal">
+    <div class="form-group">	
+		<hr>
+		<div class="col-sm-3">	
+		    <div class="has-feedback">
+				<input type="text" class="form-control" placeholder="Buscar paciente"> </input>
+				<span class="glyphicon glyphicon-search text-muted form-control-feedback"></span>
+			</div>	
+		</div>
+		<div class="col-sm-3 col-sm-offset-6">
+			<button type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#modal-nuevo-expediente">
+				<span class="glyphicon glyphicon-folder-open"></span> &nbsp;
+				Nuevo Expediente
+			</button>
+		</div>
+    </div>
+    <div class="form-group tabla-expediente">
+		<div class="col col-sm-12 bg-info">
+			<h4>Paciente(s)</h4>
+		</div>
+		<div class="tabla-expediente-row col col-sm-12" ng-repeat="expediente in expedientes | orderBy:'-nombre'">
+			<div class="col col-sm-8">
+				<h5>{{expediente.nombre}} {{expediente.apellido}}</h5>	
+			</div>
+			<div class="col col-sm-4">
+				<div class="btn-group pull-right" role="group" aria-label="Opciones">
+					<div class="btn-group" role="group">
+						<button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<span class="glyphicon glyphicon-plus-sign text-muted"></span><span class="caret text-muted"></span>
+						</button>
+						<ul class="dropdown-menu">
+							<li><a href="#">Botox</a></li>
+							<li><a href="#">Plasma</a></li>
+							<li><a href="#">Pre-Operatorio</a></li>
+						</ul>
+					</div>
+					<button type="button" class="btn btn-link">
+						<span class="glyphicon glyphicon-calendar text-muted"></span>
+					</button>
+					<button type="button" class="btn btn-link">
+						<span class="glyphicon glyphicon-comment text-muted"></span>
+					</button>
+					<button type="button" class="btn btn-link">
+						<span class="glyphicon glyphicon-envelope text-muted"></span>
+					</button>
+					<button type="button" class="btn btn-link">
+						<span class="glyphicon glyphicon-eye-open text-muted"></span>
+					</button>
+					<button type="button" class="btn btn-link" ng-click="eliminar(expediente)">
+						<span class="glyphicon glyphicon-remove text-muted"></span>
+					</button>
+				</div>
+			</div>
+		</div>
+    </div>
+  </form>
+</div>
+<!-- Nuevo Expediente -->
+<div class="modal fade" id="modal-nuevo-expediente" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h2 class="modal-title" id="myModalLabel">Nuevo Expediente</h2>
+			</div>
+			<div class="modal-body">
+				<div class="container">
+					<form role="form" class="form-horizontal">
+						<p class="lead">Registrando expediente personal</p>
+						<div class="form-group">
+							<label class="col-sm-12">Paciente</label>
+							<div class="col-sm-3"><input type="text" class="form-control" placeholder="nombre" ng-model="expediente.nombre"></div>
+							<div class="col-sm-3"><input type="text" class="form-control" placeholder="apellido" ng-model="expediente.apellido"></div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-12">Telefono</label>
+							<div class="col-sm-1">
+								<input type="text" class="form-control" placeholder="055" ng-model="expediente.area">
+								<div class="help">area</div>
+							</div>
+							<div class="col-sm-1">
+								<input type="text" class="form-control" placeholder="646" ng-model="expediente.local">
+								<div class="help">local</div>
+							</div>
+							<div class="col-sm-2">
+								<input type="text" class="form-control" placeholder="123-45-67" ng-model="expediente.numero">
+								<div class="help">numero</div>
+							</div>
+							<div class="col-sm-2">
+								<input type="text" class="form-control" placeholder="123" ng-model="expediente.extension">
+								<div class="help">ext</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-1">Referencia</label>
+							<div class="col-sm-5"><input type="text" class="form-control" placeholder="Referencia" ng-model="expediente.referencia"></div>
+						</div>
+					</form>
+				</div>    
+		    </div>
+		    <div class="modal-footer">
+			    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+			    <button type="button" class="btn btn-info" data-dismiss="modal" ng-click="agregar()">Guardar</button>
+		    </div>
+		</div>
+    </div>
+</div>
