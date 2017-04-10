@@ -5,16 +5,16 @@ angular.module('appPrincipal', ['ui.router'])
 				url:'/calendario',
 				templateUrl:'views/calendario.html'
 			})
-			.state('expediente',{
-				url: '/expediente',
-				templateUrl: 'views/expediente.html',
-				controller: 'ctrlExpediente'
+			.state('expedientes',{
+				url: '/expedientes',
+				templateUrl: 'views/expedientes.html',
+				controller: 'ctrlExpedientes'
 			})
 			.state('movimientos',{
 				url:'/movimientos',
 				templateUrl:'views/movimientos.html'
 			});
-			$urlRouterProvider.otherwise('expediente');
+			$urlRouterProvider.otherwise('expedientes');
 	})
 	.factory('servicio', function($http){
 		var servicio = {}
@@ -57,31 +57,26 @@ angular.module('appPrincipal', ['ui.router'])
 		
 		return servicio;
 	})
-	.controller('ctrlExpediente', function($scope, servicio){
-		$scope.expediente = {}
+	.controller('ctrlExpedientes', function($scope, servicio){
+		servicio.getAll();
+		//$scope.expediente = {}
+		$scope.expediente = servicio.expediente;
 		$scope.expedientes = servicio.expedientes;
 		
 		$scope.agregar = function(){
-			$scope.expedientes.push({
+			servicio.add({
 				nombre: $scope.expediente.nombre,
-				apellido: $scope.expediente.apellido,
-				area: $scope.expediente.area,
-				local: $scope.expediente.local,
-				numero: $scope.expediente.numero,
-				extension: $scope.expediente.extension,
-				referencia: $scope.expediente.referencia
+				apellidos: $scope.expediente.apellidos
 			})
 			$scope.expediente.nombre='';
-			$scope.expediente.apellido='';
-			$scope.expediente.area='';
-			$scope.expediente.local='';
-			$scope.expediente.numero='';
-			$scope.expediente.extension='';
-			$scope.expediente.referencia='';
+			$scope.expediente.apellidos='';
+		}
+		
+		$scope.actualizar = function(){
+			servicio.update($scope.expediente);
 		}
 		
 		$scope.eliminar = function(expediente){
 			servicio.delete(expediente);
 		}
-		
 	})

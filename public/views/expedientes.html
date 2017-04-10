@@ -23,7 +23,7 @@
 		</div>
 		<div class="tabla-expediente-row col col-sm-12" ng-repeat="expediente in expedientes | orderBy:'-nombre'">
 			<div class="col col-sm-8">
-				<h5>{{expediente.nombre}} {{expediente.apellido}}</h5>	
+				<h5>{{expediente.nombre}} {{expediente.apellidos}}</h5>	
 			</div>
 			<div class="col col-sm-4">
 				<div class="btn-group pull-right" role="group" aria-label="Opciones">
@@ -75,8 +75,9 @@
 						<div class="form-group">
 							<label class="col-sm-12">Paciente</label>
 							<div class="col-sm-3"><input type="text" class="form-control" placeholder="nombre" ng-model="expediente.nombre"></div>
-							<div class="col-sm-3"><input type="text" class="form-control" placeholder="apellido" ng-model="expediente.apellido"></div>
+							<div class="col-sm-3"><input type="text" class="form-control" placeholder="apellido" ng-model="expediente.apellidos"></div>
 						</div>
+						<!--
 						<div class="form-group">
 							<label class="col-sm-12">Telefono</label>
 							<div class="col-sm-1">
@@ -96,9 +97,16 @@
 								<div class="help">ext</div>
 							</div>
 						</div>
+						-->
+						<div class="form-group">
+							<label class="col-sm-1">Telefono</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" placeholder="646 123-45-67" ng-model="expediente.telefonos">
+							</div>
+						</div>
 						<div class="form-group">
 							<label class="col-sm-1">Referencia</label>
-							<div class="col-sm-5"><input type="text" class="form-control" placeholder="Referencia" ng-model="expediente.referencia"></div>
+							<div class="col-sm-5"><input type="text" class="form-control" placeholder="Referencia" ng-model="expediente.referencias"></div>
 						</div>
 					</form>
 				</div>    
