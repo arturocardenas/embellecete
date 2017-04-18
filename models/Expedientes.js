@@ -9,19 +9,25 @@ var ExpedientesSchema = new mongoose.Schema({
 	estado_civil: String,
 	hijos: String,
 	ocupacion: String,
-	telefonos: Array,
+	telefonos: [{
+		tipo: String,
+		numero: String
+	}],
 	facebook: String,
 	correo: String,
-	direccion: [{
-			calle: String,
-			numero: String,
-			colonia: String,
-			codigo_postal: Number,
-			ciudad: String,
-			estado: String,
-			pais: String
+	direcciones: [{
+		calle: String,
+		numero: String,
+		colonia: String,
+		codigo_postal: Number,
+		ciudad: String,
+		estado: String,
+		pais: String
 	}],
-	referencias: Array,
+	referencias: [{
+		fecha: Date,
+		referencia: String
+	}],
 	procedimientos: [{
 		titulo: String,
 		fecha: Date,

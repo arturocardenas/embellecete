@@ -1,4 +1,4 @@
-<!-- Expediente Personal -->
+<!-- Expedientes Personales -->
 <div class="container">
   <h2>Expedientes Personales<p class="lead">Busqueda, registro y edicion de expedientes personales</p></h2>
   <form role="form" class="form-horizontal">
@@ -6,7 +6,7 @@
 		<hr>
 		<div class="col-sm-3">	
 		    <div class="has-feedback">
-				<input type="text" class="form-control" placeholder="Buscar paciente"> </input>
+				<input type="text" class="form-control" ng-model="expediente.nombre" placeholder="Buscar paciente"> </input>
 				<span class="glyphicon glyphicon-search text-muted form-control-feedback"></span>
 			</div>	
 		</div>
@@ -21,7 +21,7 @@
 		<div class="col col-sm-12 bg-info">
 			<h4>Paciente(s)</h4>
 		</div>
-		<div class="tabla-expediente-row col col-sm-12" ng-repeat="expediente in expedientes | orderBy:'-nombre'">
+		<div class="tabla-expediente-row col col-sm-12" ng-repeat="expediente in expedientes | orderBy:'+nombre'">
 			<div class="col col-sm-8">
 				<h5>{{expediente.nombre}} {{expediente.apellidos}}</h5>	
 			</div>
@@ -46,7 +46,7 @@
 					<button type="button" class="btn btn-link">
 						<span class="glyphicon glyphicon-envelope text-muted"></span>
 					</button>
-					<button type="button" class="btn btn-link">
+					<button type="button" class="btn btn-link" ng-click="verExpediente(expediente)">
 						<span class="glyphicon glyphicon-eye-open text-muted"></span>
 					</button>
 					<button type="button" class="btn btn-link" ng-click="eliminar(expediente)">
@@ -77,36 +77,23 @@
 							<div class="col-sm-3"><input type="text" class="form-control" placeholder="nombre" ng-model="expediente.nombre"></div>
 							<div class="col-sm-3"><input type="text" class="form-control" placeholder="apellido" ng-model="expediente.apellidos"></div>
 						</div>
-						<!--
 						<div class="form-group">
 							<label class="col-sm-12">Telefono</label>
-							<div class="col-sm-1">
-								<input type="text" class="form-control" placeholder="055" ng-model="expediente.area">
-								<div class="help">area</div>
+							<div class="col-sm-3">
+								<select class="form-control" ng-model='expediente.telefonos.tipo'>
+									<option value="Celular" selected='selected'>Celular</option>
+									<option value="Casa">Casa</option>
+									<option value="Trabajo/Oficina">Trabajo/Oficina</option>
+									<option value="Otro">Otro</option>
+								</select>
 							</div>
-							<div class="col-sm-1">
-								<input type="text" class="form-control" placeholder="646" ng-model="expediente.local">
-								<div class="help">local</div>
-							</div>
-							<div class="col-sm-2">
-								<input type="text" class="form-control" placeholder="123-45-67" ng-model="expediente.numero">
-								<div class="help">numero</div>
-							</div>
-							<div class="col-sm-2">
-								<input type="text" class="form-control" placeholder="123" ng-model="expediente.extension">
-								<div class="help">ext</div>
-							</div>
-						</div>
-						-->
-						<div class="form-group">
-							<label class="col-sm-1">Telefono</label>
-							<div class="col-sm-5">
-								<input type="text" class="form-control" placeholder="646 123-45-67" ng-model="expediente.telefonos">
+							<div class="col-sm-3">
+								<input type="text" class="form-control" placeholder="646 123-45-67" ng-model="expediente.telefonos.numero">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-1">Referencia</label>
-							<div class="col-sm-5"><input type="text" class="form-control" placeholder="Referencia" ng-model="expediente.referencias"></div>
+							<div class="col-sm-5"><input type="text" class="form-control" placeholder="Referencia" ng-model="expediente.referencias.referencia"></div>
 						</div>
 					</form>
 				</div>    

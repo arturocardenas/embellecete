@@ -10,6 +10,11 @@ angular.module('appPrincipal', ['ui.router'])
 				templateUrl: 'views/expedientes.html',
 				controller: 'ctrlExpedientes'
 			})
+			.state('expediente-ver',{
+				url:'/expediente-ver',
+				templateUrl:'views/expediente-ver.html',
+				controller:'cntrlExpedienteVer'
+			})
 			.state('movimientos',{
 				url:'/movimientos',
 				templateUrl:'views/movimientos.html'
@@ -18,9 +23,7 @@ angular.module('appPrincipal', ['ui.router'])
 	})
 	.factory('servicio', function($http){
 		var servicio = {}
-		
 		servicio.expedientes = [];
-		
 		servicio.expediente = {};
 		
 		/*** Seccion de metodos remotos ***/
@@ -57,19 +60,22 @@ angular.module('appPrincipal', ['ui.router'])
 		
 		return servicio;
 	})
-	.controller('ctrlExpedientes', function($scope, servicio){
+	.controller('ctrlExpedientes', function($scope, $state, servicio){
 		servicio.getAll();
-		//$scope.expediente = {}
 		$scope.expediente = servicio.expediente;
 		$scope.expedientes = servicio.expedientes;
 		
 		$scope.agregar = function(){
 			servicio.add({
 				nombre: $scope.expediente.nombre,
-				apellidos: $scope.expediente.apellidos
+				apellidos: $scope.expediente.apellidos,
+				telefonos: $scope.expediente.telefonos,
+				referencias: $scope.expediente.referencias
 			})
 			$scope.expediente.nombre='';
 			$scope.expediente.apellidos='';
+			$scope.expediente.telefonos='';
+			$scope.expediente.referencias='';
 		}
 		
 		$scope.actualizar = function(){
@@ -79,4 +85,21 @@ angular.module('appPrincipal', ['ui.router'])
 		$scope.eliminar = function(expediente){
 			servicio.delete(expediente);
 		}
+		
+		$scope.verExpediente = function(expediente){
+			servicio.expediente=expediente;
+			$state.go('expediente-ver');
+		}
+	})
+	.controller('cntrlExpedienteVer',function($scope, $state, servicio){
+		$scope.expediente = servicio.expediente;
+		$scope.actualizar = function(){
+			servicio.update($scope.expediente);
+			$state.go('expedientes');
+		}
+		/*
+		$scope.addTelefono=function(addTipo,addNumero){
+			$scope.expediente.telefonos.push({tipo:addTipo,numero:addNumero});
+			servicio.expediente.telefonos=$scope.expediente.telefonos;
+		}*/
 	})

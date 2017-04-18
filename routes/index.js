@@ -32,6 +32,7 @@ router.put('/expediente/:id', function(req, res){
 	Expedientes.findById(req.params.id, function(err, expediente){
 		expediente.nombre = req.body.nombre;
 		expediente.apellidos = req.body.apellidos;
+		expediente.ocupacion = req.body.ocupacion;
 		
 		expediente.save(function(err){
 			if(err){res.send(err)}

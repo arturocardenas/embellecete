@@ -1,0 +1,42 @@
+<!-- Expediente Personal -->
+<div class="container">
+	<h2>{{expediente.nombre}} {{expediente.apellidos}}<p class="lead">Ultimo movimiento 02/05/2016</p></h2>
+	<input type="text" ng-model="expediente.nombre" value="{{expediente.nombre}}" />
+	<input type="text" ng-model="expediente.apellidos" value="{{expediente.apellidos}}" />
+	<input type="text" ng-model="expediente.ocupacion" value="{{expediente.ocupacion}}" />
+	<input type="button" class="btn btn-info" ng-click="actualizar()" value="actualizar"/>
+	<div class="col col-sm-8">
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h3 class="panel-title">Teléfono(s)</h3>
+			</div>
+			<div class="panel-body">
+				<div ng-repeat="telefono in expediente.telefonos">
+					<h4>{{telefono.tipo}}: {{telefono.numero}}</h4>
+				</div>
+				<div class="col col-sm-3">
+					<select class="form-control" ng-model='tipoTelefono'>
+						<option value="Celular" selected>Celular</option>
+						<option value="Casa">Casa</option>
+						<option value="Trabajo/Oficina">Trabajo/Oficina</option>
+						<option value="Otro">Otro</option>
+					</select>
+				</div>
+				<div class="col col-sm-4">
+					<input type="text" class="form-control" ng-model='numeroTelefono'/>
+				</div>
+				<div class="col col-sm-2">
+					<button class="btn btn-info" ng-click='addTelefono(tipoTelefono,numeroTelefono)'>Agregar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col col-sm-4">
+	<div class="list-group">
+	    <a href="#" class="list-group-item">Datos Personales</a>
+	    <a href="#" class="list-group-item">Antecedentes Medicos</a>
+	    <a href="#" class="list-group-item">Procedimientos</a>
+	    <a href="#" class="list-group-item">Botox</a>
+	</div>
+	</div>	
+</div>
