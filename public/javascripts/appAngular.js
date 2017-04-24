@@ -10,10 +10,10 @@ angular.module('appPrincipal', ['ui.router'])
 				templateUrl: 'views/expedientes.html',
 				controller: 'ctrlExpedientes'
 			})
-			.state('expediente-ver',{
-				url:'/expediente-ver',
-				templateUrl:'views/expediente-ver.html',
-				controller:'cntrlExpedienteVer'
+			.state('expediente',{
+				url:'/expediente',
+				templateUrl:'views/expediente.html',
+				controller:'cntrlExpediente'
 			})
 			.state('movimientos',{
 				url:'/movimientos',
@@ -25,7 +25,7 @@ angular.module('appPrincipal', ['ui.router'])
 		var servicio = {}
 		servicio.expedientes = [];
 		servicio.expediente = {};
-		
+
 		/*** Seccion de metodos remotos ***/
 		servicio.getAll = function(){
 			return $http.get('/expedientes')
@@ -34,14 +34,14 @@ angular.module('appPrincipal', ['ui.router'])
 				return servicio.expedientes
 			})
 		}
-		
+
 		servicio.add = function(expediente){
 			return $http.post('/expediente', expediente)
 			.success(function(expediente){
 				servicio.expedientes.push(expediente);
 			})
 		}
-		
+
 		servicio.update = function(expediente){
 			return $http.put('/expediente/' + expediente._id, expediente)
 			.success(function(data){
@@ -49,7 +49,7 @@ angular.module('appPrincipal', ['ui.router'])
 				servicio.expedientes[indice] = data;
 			})
 		}
-		
+
 		servicio.delete = function(expediente){
 			return $http.delete('/expediente/' + expediente._id)
 			.success(function(){
@@ -57,14 +57,14 @@ angular.module('appPrincipal', ['ui.router'])
                 servicio.expedientes.splice(indice, 1);
 			})
 		}
-		
+
 		return servicio;
 	})
 	.controller('ctrlExpedientes', function($scope, $state, servicio){
 		servicio.getAll();
 		$scope.expediente = servicio.expediente;
 		$scope.expedientes = servicio.expedientes;
-		
+
 		$scope.agregar = function(){
 			servicio.add({
 				nombre: $scope.expediente.nombre,
@@ -77,21 +77,21 @@ angular.module('appPrincipal', ['ui.router'])
 			$scope.expediente.telefonos='';
 			$scope.expediente.referencias='';
 		}
-		
+
 		$scope.actualizar = function(){
 			servicio.update($scope.expediente);
 		}
-		
+
 		$scope.eliminar = function(expediente){
 			servicio.delete(expediente);
 		}
-		
+
 		$scope.verExpediente = function(expediente){
 			servicio.expediente=expediente;
-			$state.go('expediente-ver');
+			$state.go('expediente');
 		}
 	})
-	.controller('cntrlExpedienteVer',function($scope, $state, servicio){
+	.controller('cntrlExpediente',function($scope, $state, servicio){
 		$scope.expediente = servicio.expediente;
 		$scope.actualizar = function(){
 			servicio.update($scope.expediente);
